@@ -1,3 +1,24 @@
+const numeroDecimalInput= document.querySelector("#numeroDecimal");
+const numeroRomanoDiv= document.querySelector("#numeroRomano");
+const converterButton= document.querySelector("#botaoConverter");
+
+window.onload= () => {
+    numeroDecimalInput.value= ""
+    numeroDecimalInput.focus();
+};
+
+numeroDecimalInput.addEventListener('focusout', () => {
+
+    if(numeroDecimalInput.value === "")
+        numeroRomanoDiv.innerHTML= "";
+});
+
+converterButton.addEventListener('click', () => {
+
+    const algarismoRomano= converterParaRomano(numeroDecimalInput.value);
+    numeroRomanoDiv.innerHTML= algarismoRomano;
+});
+
 function converterParaRomano(num) {
 
     let romano= "";

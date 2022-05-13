@@ -2,6 +2,8 @@
     --branco: rgb(240, 237, 230);
     --preto: rgb(39, 39, 39);
     --azul: rgb(88, 139, 148);
+    --vermelho: rgb(189, 9, 9);
+    --black: black;
 }
 
 ::selection{
@@ -87,9 +89,18 @@ input[type=text]{
 
 .botao:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: var(--black);
 }
 
 .numero, .botao{
     padding: 10px;
+}
+
+.alerta{
+    margin: 10px;
+    color: var(--vermelho);
+}
+
+.oculto{
+    visibility: hidden;
 }

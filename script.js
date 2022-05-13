@@ -1,6 +1,7 @@
 const numeroDecimalInput= document.querySelector("#numeroDecimal");
 const numeroRomanoDiv= document.querySelector("#numeroRomano");
 const converterButton= document.querySelector("#botaoConverter");
+const alertaPar= document.querySelector("#alerta");
 
 window.onload= () => {
     numeroDecimalInput.value= ""
@@ -9,15 +10,35 @@ window.onload= () => {
 
 numeroDecimalInput.addEventListener('focusout', () => {
 
-    if(numeroDecimalInput.value === "")
-        numeroRomanoDiv.innerHTML= "";
+    if(numeroDecimalInput.value === ""){
+        limparDiv(numeroRomanoDiv);
+        ocultarAlerta(alertaPar);   
+    }
 });
 
 converterButton.addEventListener('click', () => {
 
-    const algarismoRomano= converterParaRomano(numeroDecimalInput.value);
-    numeroRomanoDiv.innerHTML= algarismoRomano;
+    const entrada= numeroDecimalInput.value;
+
+    if(/^\d+$/.test(entrada) &&
+        (0<entrada && entrada<4000)){
+
+        numeroRomanoDiv.innerHTML= converterParaRomano(entrada);
+        ocultarAlerta(alertaPar);        
+        
+    }else{
+        alertaPar.classList.remove("oculto");
+        limparDiv(numeroRomanoDiv);
+    }    
 });
+
+const ocultarAlerta= alerta => {
+    if(!alerta.classList.contains("oculto"))
+        alerta.classList.add("oculto"); 
+};
+
+const limparDiv= div => div.innerHTML= "";
+
 
 function converterParaRomano(num) {
 

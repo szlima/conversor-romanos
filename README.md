@@ -10,4 +10,6 @@ Esta aplicação realiza a conversão de um número decimal para algarismos roma
 
 ## :art: Layout
 
-![layout](layout.png)
+![layout1](img/layout1.png)
+![layout2](img/layout2.png)
+![layout3](img/layout3.png)

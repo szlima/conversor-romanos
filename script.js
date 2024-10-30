@@ -1,102 +1,102 @@
-const numeroDecimalInput= document.querySelector("#numeroDecimal");
-const numeroRomanoDiv= document.querySelector("#numeroRomano");
-const converterButton= document.querySelector("#botaoConverter");
-const alertaPar= document.querySelector("#alerta");
+const inputArabic= document.querySelector('#input--arabic');
+const resultRoman= document.querySelector('#result--roman');
+const buttonConvert= document.querySelector('#button--convert');
+const alertError= document.querySelector('#alert--error');
 
-window.onload= () => {
-    numeroDecimalInput.value= ""
-    numeroDecimalInput.focus();
+const ROMAN_NUMERALS= {
+    'M': 1000,
+    'D': 500,
+    'C': 100,
+    'L': 50,
+    'X': 10,
+    'V': 5,
+    'I': 1
 };
 
-numeroDecimalInput.addEventListener('focusout', () => {
+// ---------- ----------
 
-    if(numeroDecimalInput.value === ""){
-        limparDiv(numeroRomanoDiv);
-        ocultarAlerta(alertaPar);   
+window.addEventListener('load', () => {
+    inputArabic.value= '';
+    inputArabic.focus();
+});
+
+inputArabic.addEventListener('focusout', () => {
+
+    if(inputArabic.value === ''){
+        cleanResult();
+        hideAlert();
     }
 });
 
-converterButton.addEventListener('click', () => {
+buttonConvert.addEventListener('click', () => {
 
-    const entrada= numeroDecimalInput.value;
+    const inputValue= inputArabic.value;
 
-    if(/^\d+$/.test(entrada) &&
-        (0<entrada && entrada<4000)){
+    if(/^\d+$/.test(inputValue) &&
+        (0<inputValue && inputValue<4000)){
 
-        numeroRomanoDiv.innerHTML= converterParaRomano(entrada);
-        ocultarAlerta(alertaPar);        
+        resultRoman.innerHTML= convertToRoman(inputValue);
+        hideAlert();
         
     }else{
-        alertaPar.classList.remove("main__alert--hidden");
-        limparDiv(numeroRomanoDiv);
+        alertError.classList.remove('main__alert--hidden');
+        cleanResult();
     }    
 });
 
-const ocultarAlerta= alerta => {
-    if(!alerta.classList.contains("main__alert--hidden"))
-        alerta.classList.add("main__alert--hidden");
-};
+// ---------- ----------
 
-const limparDiv= div => div.innerHTML= "";
+const cleanResult= () => resultRoman.innerHTML= '';
 
+const hideAlert= () => alertError.classList.add('main__alert--hidden');
 
-function converterParaRomano(num) {
+const convertToRoman= arabic => {
 
-    let romano= "";
-    let numero= num;
+    let roman= '';
+    let number= arabic;
 
-    const ALGARISMOS= {
-        'M': 1000,
-        'D': 500,
-        'C': 100,
-        'L': 50,
-        'X': 10,
-        'V': 5,
-        'I': 1
-    };
+    for(let i in ROMAN_NUMERALS) {
+        if(number >= ROMAN_NUMERALS[i]){
 
-    for(let i in ALGARISMOS) {
-        if(numero >= ALGARISMOS[i]){
-
-            let qntd;
-            let index= Object.keys(ALGARISMOS).indexOf(i);
-            let ant= Object.keys(ALGARISMOS)[index+1];
-            let prox= Object.keys(ALGARISMOS)[index-1];
+            let digitLength;
+            let index= Object.keys(ROMAN_NUMERALS).indexOf(i);
+            let previous= Object.keys(ROMAN_NUMERALS)[index+1];
+            let next= Object.keys(ROMAN_NUMERALS)[index-1];
       
-            const calculaNumero= x => x % ALGARISMOS[i];
-            const calculaQntd= (x,k) => parseInt(x/ALGARISMOS[k]);
+            const calculateNumber= x => x % ROMAN_NUMERALS[i];
+            const calculateDigitLength= (x,k) => parseInt(x/ROMAN_NUMERALS[k]);
       
             if(['M','C','X','I'].includes(i)){
         
-                qntd= calculaQntd(numero, i);
-                numero= calculaNumero(numero);
+                digitLength= calculateDigitLength(number, i);
+                number= calculateNumber(number);
 
-                if(qntd===4)
-                    romano+= i; 
+                if(digitLength === 4)
+                    roman+= i;
                 else
-                    for(let j=0; j<qntd; j++)
-                        romano+= i;         
+                    for(let j=0; j<digitLength; j++)
+                        roman+= i;
         
             }else{ //'D','L','V'
 
-                numero= calculaNumero(numero);
-                qntd= calculaQntd(numero, ant);
+                number= calculateNumber(number);
+                digitLength= calculateDigitLength(number, previous);
 
-                if(qntd===4)
-                    romano+= ant;
+                if(digitLength === 4)
+                    roman+= previous;
                 else{          
-                    romano+= i;
-                    for(let j=0; j<qntd; j++)
-                        romano+= ant; 
+                    roman+= i;
+                    for(let j=0; j<digitLength; j++)
+                        roman+= previous;
                 }
 
-                numero-= qntd*ALGARISMOS[ant];
+                number-= digitLength*ROMAN_NUMERALS[previous];
             }
 
-            if(qntd===4)
-                romano+= prox; 
+            if(digitLength === 4)
+                roman+= next;
         }     
     }
   
-    return romano;
-}
+    return roman;
+};

@@ -5,21 +5,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Conversor de numerais romanos</title>
 
-        <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+
+        <link rel="stylesheet" type="text/css" href="./styles/index.css"/>
     </head>
     <body>
-        <h1>Conversor de numerais romanos</h1>
+        <h1 class="heading">Conversor de numerais romanos</h1>
 
-        <div class="conversor">
-            <div class="numeros">
-                <input type="text" id="numeroDecimal" class="numero"/>
-                <div id="numeroRomano" class="numero romano"></div>
+        <main class="main">
+            <div class="main__display">
+                <input type="text" id="numeroDecimal" class="display__numerals"/>
+                <div id="numeroRomano" class="display__numerals display__numerals--roman"></div>
             </div>
     
-            <button id="botaoConverter" class="botao">Converter</button>
-            <p class="alerta oculto" id="alerta">Apenas números entre 1 e 3999 são aceitos.</p>
-        </div>
+            <button id="botaoConverter" class="main__button">Converter</button>
+            <p id="alerta" class="main__alert main__alert--hidden">Apenas números entre 1 e 3999 são aceitos.</p>
+        </main>
 
         <script type="text/javascript" src="script.js"></script>        
     </body>

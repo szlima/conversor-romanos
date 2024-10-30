@@ -27,14 +27,14 @@ converterButton.addEventListener('click', () => {
         ocultarAlerta(alertaPar);        
         
     }else{
-        alertaPar.classList.remove("oculto");
+        alertaPar.classList.remove("main__alert--hidden");
         limparDiv(numeroRomanoDiv);
     }    
 });
 
 const ocultarAlerta= alerta => {
-    if(!alerta.classList.contains("oculto"))
-        alerta.classList.add("oculto"); 
+    if(!alerta.classList.contains("main__alert--hidden"))
+        alerta.classList.add("main__alert--hidden");
 };
 
 const limparDiv= div => div.innerHTML= "";

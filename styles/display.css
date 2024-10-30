@@ -1,0 +1,36 @@
+
+.main__display{
+    display: flex;
+    gap: 1rem;
+}
+
+ .display__numerals{
+    min-width: 10rem;
+    min-height: 10rem;
+    padding: 1rem;
+    flex: 1;
+
+    background-color: var(--color-blue);
+    color: var(--color-white);    
+    font-family: var(--font-arvo);
+    font-size: 3rem;
+}
+
+.display__numerals--roman{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-wrap: anywhere;
+}
+
+@media only screen and (orientation: portrait){
+    .main__display{
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-height: 600px) and (orientation: landscape){
+    .display__numerals{
+        min-height: 20rem;
+    }
+}

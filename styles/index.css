@@ -1,5 +1,6 @@
 @import url("./variables.css");
 @import url("./reset.css");
+@import url("./header.css");
 @import url("./display.css");
 @import url("./button.css");
 
@@ -15,10 +16,6 @@ body{
     justify-content: center;
     align-items: center;
     gap: 1rem;
-}
-
-.heading{
-    font-family: var(--font-arvo);
 }
 
 .main{
